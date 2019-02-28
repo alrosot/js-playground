@@ -545,7 +545,7 @@ function render()
 
 function renderScore()
 {
-	context.font = "16px Arial";
+	// context.font = "16px Arial";
 	context.fillStyle = "#57D9A3";
 	context.fillText("Stories - " + stories, canvas.width - 300, 20);
 	context.fillStyle = "#FF5630";
