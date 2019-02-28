@@ -6,7 +6,7 @@ var Asteroid = (function()
 	{
 		var obj = Object.create(def);
 		obj.radius = 40;
-		obj.color = '#FF5900';
+		// obj.color = '#6554C0';
 		obj.pos = Vec2D.create(0, 0);
 		obj.vel = Vec2D.create(0, 0);
 		obj.blacklisted = false;

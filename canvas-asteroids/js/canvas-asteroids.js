@@ -1,5 +1,8 @@
 //common vars
 
+var img = new Image();
+img.src = "http://upload.wikimedia.org/wikipedia/commons/d/d2/Svg_example_square.svg";
+
 var canvas;
 var context;
 var screenWidth;
@@ -243,7 +246,7 @@ function generateThrustParticle()
 	if(!p) return;
 
 	p.radius = Math.random() * 3 + 2;
-	p.color = '#FFF';
+	p.color = '#0052CC';
 	p.lifeSpan = 80;
 	p.pos.setXY(ship.pos.getX() + Math.cos(ship.angle) * -14, ship.pos.getY() + Math.sin(ship.angle) * -14);
 	p.vel.setLength(8 / p.radius);
@@ -336,11 +339,11 @@ function updateAsteroids()
 	{
 		var factor = (Math.random() * 2) >> 0;
 
-		generateAsteroid(screenWidth * factor, screenHeight * factor, 60 , 'b');
+		generateAsteroid(screenWidth * factor, screenHeight * factor, 60 , 'b', '#6554C0');
 	}
 }
 
-function generateAsteroid(x, y, radius, type)
+function generateAsteroid(x, y, radius, type, color)
 {
 	var a = asteroidPool.getElement();
 
@@ -353,11 +356,12 @@ function generateAsteroid(x, y, radius, type)
 	a.pos.setXY(x, y);
 	a.vel.setLength(1 + asteroidVelFactor);
 	a.vel.setAngle(Math.random() * (Math.PI * 2));
+	a.color = color;
 
 	//bullets[bullets.length] = b; same as: bullets.push(b);
 
 	asteroids[asteroids.length] = a;
-	asteroidVelFactor += 0.025;
+	asteroidVelFactor += 0.05;
 }
 
 function checkCollisions()
@@ -425,7 +429,7 @@ function generateShipExplosion()
 
 		p.radius = Math.random() * 6 + 2;
 		p.lifeSpan = 80;
-		p.color = '#FFF';
+		p.color = '#0052CC';
 		p.vel.setLength(20 / p.radius);
 		p.vel.setAngle(ship.angle + (1 - Math.random() * 2) * doublePI);
 		p.pos.setXY(ship.pos.getX() + Math.cos(p.vel.getAngle()) * (ship.radius * 0.8), ship.pos.getY() + Math.sin(p.vel.getAngle()) * (ship.radius * 0.8));
@@ -472,7 +476,7 @@ function generateAsteroidExplosion(asteroid)
 
 		p.radius = Math.random() * (asteroid.radius >> 2) + 2;
 		p.lifeSpan = 80;
-		p.color = '#FF5900';
+		p.color = asteroid.color;
 		p.vel.setLength(20 / p.radius);
 		p.vel.setAngle(ship.angle + (1 - Math.random() * 2) * doublePI);
 		p.pos.setXY(asteroid.pos.getX() + Math.cos(p.vel.getAngle()) * (asteroid.radius * 0.8), asteroid.pos.getY() + Math.sin(p.vel.getAngle()) * (asteroid.radius * 0.8));
@@ -489,15 +493,15 @@ function resolveAsteroidType(asteroid)
 	{
 		case 'b':
 
-		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 40, 'm');
-		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 40, 'm');
+		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 40, 'm', '#57D9A3');
+		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 40, 'm', '#57D9A3');
 
 		break;
 
 		case 'm':
 
-		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 20, 's');
-		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 20, 's');
+		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 20, 's', '#FF5630');
+		generateAsteroid(asteroid.pos.getX(), asteroid.pos.getY(), 20, 's', '#C1C7D0');
 
 		break;
 	}
@@ -505,7 +509,7 @@ function resolveAsteroidType(asteroid)
 
 function render()
 {
-	context.fillStyle = '#262626';
+	context.fillStyle = '#FFF';
 	context.globalAlpha = 0.4;
 	context.fillRect(0, 0, screenWidth, screenHeight);
 	context.globalAlpha = 1;
@@ -514,7 +518,7 @@ function render()
 	renderParticles();
 	renderBullets();
 	renderAsteroids();
-	renderScanlines();
+	// renderScanlines();
 }
 
 function renderShip()
@@ -525,7 +529,7 @@ function renderShip()
 	context.translate(ship.pos.getX() >> 0, ship.pos.getY() >> 0);
 	context.rotate(ship.angle);
 
-	context.strokeStyle = '#FFF';
+	context.strokeStyle = '#0052CC';
 	context.lineWidth = (Math.random() > 0.9) ? 2 : 1;
 	context.beginPath();
 	context.moveTo(10, 0);
@@ -534,6 +538,7 @@ function renderShip()
 	context.lineTo(10, 0);
 	context.stroke();
 	context.closePath();
+	// context.drawImage(img, 0, 0);
 
 	context.restore();
 }
@@ -595,11 +600,11 @@ function renderAsteroids()
 		for(j; j > -1; --j)
 		{
 			context.lineTo((a.pos.getX() + Math.cos(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0, (a.pos.getY() + Math.sin(doublePI * (j / a.sides) + a.angle) * a.radius) >> 0);
-			
+
 		}
 
 		if(Math.random() > 0.2) context.stroke();
-		
+
 		context.closePath();
 	}
 }
@@ -618,7 +623,7 @@ function renderScanlines()
 		context.beginPath();
 		context.moveTo(0, i * 4);
 		context.lineTo(screenWidth, i * 4);
-		context.strokeStyle = (Math.random() > 0.0001) ? '#FFF' : '#222';
+		context.strokeStyle = (Math.random() > 0.0001) ? '#0052CC' : '#222';
 		context.stroke();
 	}
 

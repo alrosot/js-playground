@@ -6,7 +6,7 @@ var Particle = (function()
 	{
 		var obj = Object.create(def);
 		obj.radius = 2;
-		obj.color = '#FFF';
+		obj.color = '#0052CC';
 		obj.lifeSpan = 0;
 		obj.fric = 0.98;
 		obj.pos = Vec2D.create(0, 0);

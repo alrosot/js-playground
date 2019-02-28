@@ -6,7 +6,7 @@ var Bullet = (function()
 	{
 		var obj = Object.create(def);
 		obj.radius = 4;
-		obj.color = '#FFF';
+		obj.color = '#0052CC';
 		obj.pos = Vec2D.create(0, 0);
 		obj.vel = Vec2D.create(0, 0);
 		obj.blacklisted = false;
