@@ -8,15 +8,18 @@ canvas {
 	height: 100%;
 	background: #FFF;
 	color: #FFF;
+	border-radius: 18px;
+	border: 3px solid #0052CC;
 }
 
 #info {
 	color: #FFF;
 	font-family: "Roboto", Monaco, "Bitstream Vera Sans Mono", monospace; */
 	margin: 10px 10px 0;
-	padding: 8px;
+	padding: 10px;
 	background: #0052CC;
 	position: absolute;
+	border-radius: 18px;
 	z-index: 1;
 }
 
