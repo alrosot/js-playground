@@ -1,7 +1,7 @@
 //common vars
 
 var img = new Image();
-img.src = "https://s3-ap-southeast-2.amazonaws.com/shipit-45-asteroids/logo-blue-onecolor-rgb.svg";
+img.src = "https://s3-ap-southeast-2.amazonaws.com/shipit-45-asteroids/Atlassian-vertical-blue-onecolor-rgb.png";
 
 var canvas;
 var context;
@@ -572,7 +572,7 @@ function renderShip()
 	// // context.lineTo(10, 0);
 	// // context.stroke();
 	// // context.closePath();
-	context.drawImage(img, -20, -25, 40, 45);
+	context.drawImage(img, -20, -25, 35, 39);
 
 	context.restore();
 }
