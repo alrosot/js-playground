@@ -545,14 +545,15 @@ function render()
 
 function renderScore()
 {
-	context.font = "16px Arial";
-	context.fillStyle = "#57D9A3";
-	context.fillText("Stories - " + stories, canvas.width - 300, 20);
-	context.fillStyle = "#FF5630";
-	context.fillText("Bugs - " + bugs, canvas.width - 190, 20);
-	context.fillStyle = "#C1C7D0";
-	context.fillText("Tasks - " + tasks, canvas.width - 100, 20);
-
+	setTimeout(function () {
+		context.font = "16px Arial";
+		context.fillStyle = "#57D9A3";
+		context.fillText("Stories - " + stories, canvas.width - 300, 20);
+		context.fillStyle = "#FF5630";
+		context.fillText("Bugs - " + bugs, canvas.width - 190, 20);
+		context.fillStyle = "#C1C7D0";
+		context.fillText("Tasks - " + tasks, canvas.width - 100, 20);
+	}, 300);
 }
 
 function renderShip()
