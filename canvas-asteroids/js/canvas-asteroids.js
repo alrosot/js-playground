@@ -540,7 +540,7 @@ function render()
 	renderAsteroids();
 	renderScore();
 
-	// renderScanlines();
+	renderScanlines();
 }
 
 function renderScore()
