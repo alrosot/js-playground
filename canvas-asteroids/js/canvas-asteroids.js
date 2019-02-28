@@ -1,7 +1,7 @@
 //common vars
 
 var img = new Image();
-img.src = "http://upload.wikimedia.org/wikipedia/commons/d/d2/Svg_example_square.svg";
+img.src = "https://s3-ap-southeast-2.amazonaws.com/shipit-45-asteroids/logo-blue-onecolor-rgb.svg";
 
 var canvas;
 var context;
@@ -10,6 +10,10 @@ var screenHeight;
 var doublePI = Math.PI * 2;
 
 //game vars
+
+var stories = 0;
+var bugs = 0;
+var tasks = 0;
 
 var ship;
 
@@ -460,6 +464,7 @@ function destroyAsteroid(asteroid)
 
 	generateAsteroidExplosion(asteroid);
 	resolveAsteroidType(asteroid);
+	score(asteroid);
 }
 
 function generateAsteroidExplosion(asteroid)
@@ -484,6 +489,21 @@ function generateAsteroidExplosion(asteroid)
 		//particles[particles.length] = p; same as: particles.push(p);
 
 		particles[particles.length] = p;
+	}
+}
+
+function score(asteroid)
+{
+	if (asteroid.type === 'b') {
+
+	} else if (asteroid.type === 'm') {
+		stories += 1
+	} else if (asteroid.type === 's') {
+		if (asteroid.color == '#C1C7D0') {
+			tasks += 1;
+		} else {
+			bugs += 1;
+		}
 	}
 }
 
@@ -518,7 +538,21 @@ function render()
 	renderParticles();
 	renderBullets();
 	renderAsteroids();
+	renderScore();
+
 	// renderScanlines();
+}
+
+function renderScore()
+{
+	context.font = "20px Arial";
+	context.fillStyle = "#57D9A3";
+	context.fillText("Stories - " + stories, canvas.width - 300, 35);
+	context.fillStyle = "#FF5630";
+	context.fillText("Bugs - " + bugs, canvas.width - 190, 35);
+	context.fillStyle = "#C1C7D0";
+	context.fillText("Tasks - " + tasks, canvas.width - 100, 35);
+
 }
 
 function renderShip()
@@ -527,18 +561,18 @@ function renderShip()
 
 	context.save();
 	context.translate(ship.pos.getX() >> 0, ship.pos.getY() >> 0);
-	context.rotate(ship.angle);
+	context.rotate(ship.angle + 1.5);
 
-	context.strokeStyle = '#0052CC';
-	context.lineWidth = (Math.random() > 0.9) ? 2 : 1;
-	context.beginPath();
-	context.moveTo(10, 0);
-	context.lineTo(-10, -10);
-	context.lineTo(-10, 10);
-	context.lineTo(10, 0);
-	context.stroke();
-	context.closePath();
-	// context.drawImage(img, 0, 0);
+	// context.strokeStyle = '#0052CC';
+	// context.lineWidth = (Math.random() > 0.9) ? 2 : 1;
+	// // context.beginPath();
+	// // context.moveTo(10, 0);
+	// // context.lineTo(-10, -10);
+	// // context.lineTo(-10, 10);
+	// // context.lineTo(10, 0);
+	// // context.stroke();
+	// // context.closePath();
+	context.drawImage(img, -20, -25, 40, 45);
 
 	context.restore();
 }
@@ -650,6 +684,10 @@ function generateShot()
 
 function resetGame()
 {
+	stories = 0;
+	bugs = 0;
+	tasks = 0;
+
 	asteroidVelFactor = 0;
 
 	ship.pos.setXY(screenWidth >> 1, screenHeight >> 1);

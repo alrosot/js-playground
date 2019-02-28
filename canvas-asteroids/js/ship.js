@@ -11,7 +11,7 @@ var Ship = (function()
 		obj.vel = Vec2D.create(0, 0);
 		obj.thrust = Vec2D.create(0, 0);
 		obj.idle = false;
-		obj.radius = 8;
+		obj.radius = 25;
 		obj.idleDelay = 0;
 
 		return obj;
